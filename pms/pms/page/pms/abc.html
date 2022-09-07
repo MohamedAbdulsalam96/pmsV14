@@ -1,0 +1,69 @@
+<div id="pagewrap">
+
+<!-- 	{% for (var i=0; i < 2; i++) %}	
+ -->	<section id="content">
+		<h2>1st Content Area</h2>
+		<a onclick="vicky()" class="grey list-id seen ellipsis"><div class="list-item"> Vicky</div></a>
+	</section>
+	<section id="middle">
+		<h2>2nd Content Area</h2>
+		<p>At full width all three columns will be displayed side by side. As the page is resized the third column will collapse under the first and second. At the smallest screen size all three columns will be stacked on top of one another.</p>
+		<p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+	</section>
+
+	<aside id="sidebar">
+		<h2>3rd Content Area</h2>
+		<p>Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+		<p>Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
+	</aside>
+	
+
+
+</div>
+
+
+
+<script type="text/javascript">
+	function vicky(){
+		alert("HI");
+		
+	}
+</script>
+
+
+
+<style type="text/css">
+#pagewrap {
+/*	padding: 5px;
+*/	width: 100%;
+/*	margin: 20px auto;
+*/}
+
+
+#content {
+	width: 33%;
+	float: left;
+	padding: 5px 15px;
+}
+
+#middle {
+	width: 33%; /* Account for margins + border values */
+	float: left;
+	padding: 5px 15px;
+	margin: 0px 5px 5px 5px;
+}
+
+#sidebar {
+	width: 33%;
+	padding: 5px 15px;
+	float: left;
+}
+
+.col-md-12 {
+	width: 100% !important; 
+}
+
+</style>
+
+

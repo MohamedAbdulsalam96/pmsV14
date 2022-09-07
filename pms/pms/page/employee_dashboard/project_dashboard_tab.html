@@ -1,0 +1,274 @@
+<style type="text/css">
+
+</style>
+
+<ul class="nav nav-tabs row">
+    <li class="active col-md-4"><a data-toggle="tab" href="#tasks">
+        <i class="fa fa-tasks fa-lg mg" aria-hidden="true"></i>
+    Tasks</a></li>
+    <li class="col-md-4"><a data-toggle="tab" href="#bugs">
+        <i class="fa fa-exclamation-triangle fa-lg mg" aria-hidden="true"></i>
+    Bugs</a></li>
+    <li class="col-md-4"><a data-toggle="tab" href="#info">
+        <i class="fa fa-info-circle fa-lg mg" aria-hidden="true"></i>
+    Info</a></li>
+</ul>
+
+<div class="tab-content maini">
+    <div id="info" class="tab-pane fade">
+        <div class="row">
+            <div class="col-md-12">   
+                <table class="table table-bordered">
+                    <thead style="background-color: #dedede;">
+                        <tr>
+                            <th>Project Name</th>
+                            <th>status</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{content.data.project_name}}</td>
+                            <td>{{content.data.status}}</td>
+                            <td>{{content.data.priority}}</td>
+                        </tr>
+                    </tbody>
+                </table>     
+            </div>              
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead style="background-color: #dedede;">
+                <tr>
+                    <th>Idx</th>
+                    <th>Module Name</th>
+                    <th>status</th>
+                    <th>Task Linked</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if(content.modules.length > 0) { %}
+                    {% for(var y=0; y< content.modules.length; y++) { %} <tr>
+                        <td>{{y+1}}</td>
+                        <td>{{content.modules[y].module_name}}</td>
+                        <td>{{content.modules[y].status}}</td>
+                        <td>{{content.modules[y].task}}</td>
+                        </tr>
+                    {% } %}
+                {% } %}
+                {% if(content.modules.length == 0) { %} 
+                    <tr><td colspan="4" style="text-align: center;"><h4>No Modules Found</h4></td></tr>
+                {% } %}    
+            </tbody>
+        </table>            
+        </div>
+        <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead style="background-color: #dedede;">
+                <tr>
+                    <th>Idx</th>
+                    <th>Screen Name</th>
+                    <th>status</th>
+                    <th>Task Linked</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if(content.screens.length > 0) { %}
+                    {% for(var y=0; y< content.screens.length; y++) { %} 
+                    <tr>
+                        <td>{{y+1}}</td>
+                        <td>{{content.screens[y].screen_name}}</td>
+                        <td>{{content.screens[y].status}}</td>
+                        <td>{{content.screens[y].task}}</td>
+                    </tr>
+                    {% } %}
+                {% } %}    
+                {% if(content.screens.length == 0) { %} 
+                    <tr><td colspan="4" style="text-align: center;"><h4>No Screens Found</h4></td></tr>
+                {% } %}
+            </tbody>
+        </table>            
+        </div>            
+        </div>
+    </div>
+    <div id="tasks" class="tab-pane fade in active">
+        {% if(content.task_list.length > 0) { %}
+            <div class="row">
+                <div class="col-md-4 taskside">
+                    <ul class="nav nav-tabs row jo">
+                        {% for(var y=0; y < content.task_list.length; y++) { %}
+                            <li class="col-md-12 {% if(y == 0) { %} active {% } %} sidetab">
+                                <a data-toggle="tab" href="#{{content.task_list[y].name}}">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span style="float: left;">
+                                                {{content.task_list[y].subject}}
+                                                </span>
+                                                <span class="
+                                                {% if(content.task_list[y].status == "Open") { %}
+                                                btn-xs btn-danger
+                                                {% } %}
+                                                {% if(content.task_list[y].status == "Closed") { %}
+                                                btn-xs btn-success
+                                                {% } %}
+                                                {% if(content.task_list[y].status == "Working") { %}
+                                                btn-xs btn-warning
+                                                {% } %}" 
+                                                style="float: right;">
+                                                    {{content.task_list[y].status}}
+                                                </span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span style="float: left; margin-top: 15px;">
+                                                {{content.task_list[y].created_date}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% } %}    
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content">
+                        {% for(var y=0; y < content.task_list.length; y++) { %}
+                            <div class="tab-pane {% if(y == 0) { %} active {% } %}" 
+                            id="{{content.task_list[y].name}}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Status</h3>
+                                        <select data-task="{{content.task_list[y].name}}" onchange="taskchange(this)" type="text" autocomplete="off" class="input-with-feedback form-control" maxlength="140" data-fieldtype="Select" data-fieldname="status" placeholder="" data-doctype="Module">
+                                            {% for(var z=0; z< content.options.length; z++) { %}
+                                                <option value="{{content.options[z]}}" 
+                                                {% if(content.task_list[y].status == content.options[z]) { %}
+                                                selected
+                                                {% } %}>{{content.options[z]}}</option>
+                                            {% } %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>Priority</h3>
+                                        <p>{{content.task_list[y].priority}}</p>
+                                    </div>
+                                    {% if(content.task_list[y].exp_start_date) { %}
+                                    <div class="col-md-6">
+                                        <h3>Start Date</h3>
+                                        <p>{{content.task_list[y].exp_start_date}}</p>
+                                    </div>
+                                    {% } %}
+                                    {% if(content.task_list[y].exp_end_date) { %}
+                                    <div class="col-md-6">
+                                        <h3>End Date</h3>
+                                        <p>{{content.task_list[y].exp_end_date}}</p>
+                                    </div>
+                                    {% } %}
+                                    {% if(content.task_list[y].description) { %}
+                                    <div class="col-md-12">
+                                        <h3>Description</h3>
+                                        <p>{{content.task_list[y].description}}</p>
+                                    </div>
+                                    {% } %}
+                                </div>
+                                
+                            </div>
+                         {% } %}     
+                    </div>
+                </div>
+            </div>
+        {% } %} 
+        {% if(content.task_list.length == 0) { %}
+            <div style="text-align: center;">
+                <h3>No Tasks Found</h3>
+            </div>
+        {% } %}
+    </div> 
+    <div id="bugs" class="tab-pane fade">
+        {% if(content.bugs.length > 0) { %}
+            <div class="row">
+                <div class="col-md-4 bugside">
+                    <ul class="nav nav-tabs row jo">
+                        {% for(var y=0; y < content.bugs.length; y++) { %}
+                            <li class="col-md-12 {% if(y == 0) { %} active {% } %} sidetab">
+                                <a data-toggle="tab" href="#{{content.bugs[y].name}}">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span style="float: left;">
+                                                {{content.bugs[y].bug_title}}
+                                                </span>
+                                                <span class="
+                                                {% if(content.bugs[y].status == "Open" || "Re-open") { %}
+                                                btn-xs btn-danger
+                                                {% } %}
+                                                {% if(content.bugs[y].status == "Closed" || "Fixed") { %}
+                                                btn-xs btn-success
+                                                {% } %}
+                                                {% if(content.bugs[y].status == "Working") { %}
+                                                btn-xs btn-warning
+                                                {% } %}" 
+                                                style="float: right;">
+                                                    {{content.bugs[y].status}}
+                                                </span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span style="float: left; margin-top: 15px;">
+                                                {{content.bugs[y].creation}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% } %}    
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content">
+                        {% for(var y=0; y < content.bugs.length; y++) { %}
+                            <div class="tab-pane {% if(y == 0) { %} active {% } %}" 
+                            id="{{content.bugs[y].name}}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Status</h3>
+                                        <select data-bug="{{content.bugs[y].name}}" onchange="bugchange(this)" id="project_task_select" type="text" autocomplete="off" class="input-with-feedback form-control" maxlength="140" data-fieldtype="Select" data-fieldname="status" placeholder="" data-doctype="Module">
+                                            {% for(var z=0; z< content.bug_options.length; z++) { %}
+                                                {% if(content.bugs[y].status == content.bug_options[z]) { %}
+                                                    <option value="{{content.bug_options[z]}}" selected>{{content.bug_options[z]}}</option>
+                                                {% } %} 
+                                                {% if(content.bugs[y].status != content.bug_options[z]) { %}
+                                                    <option value="{{content.bug_options[z]}}">{{content.bug_options[z]}}</option>
+                                                {% } %}    
+                                            {% } %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>Priority</h3>
+                                        <p>{{content.bugs[y].priority}}</p>
+                                    </div>
+                                    {% if(content.bugs[y].bug_description) { %}
+                                    <div class="col-md-12">
+                                        <h3>Description</h3>
+                                        <p>{{content.bugs[y].bug_description}}</p>
+                                    </div>
+                                    {% } %}
+                                </div>
+                            </div>
+                         {% } %}    
+                    </div>
+                </div>
+            </div>
+        {% } %}
+        {% if(content.bugs.length == 0) { %}
+            <div style="text-align: center;">
+                <h3>No Bugs Found</h3>
+            </div>
+        {% } %}
+    </div>    
+</div>

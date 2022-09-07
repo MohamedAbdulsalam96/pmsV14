@@ -1,0 +1,58 @@
+{% extends "templates/web.html" %} {% block head %} {{ super() }}
+<style type="text/css">
+.container {
+     padding-right: 0px; 
+     padding-left: 0px; 
+     margin-right: 0px; 
+     margin-left: 0px;
+
+}
+.page-container {
+    max-width: 100%;
+}
+@media (min-width: 1200px){
+.container {
+    width: 100%;
+}
+}
+
+.navbar{
+    display: none;
+}
+.web-footer{
+    display: none;
+}
+
+.treediv{
+    border: 1px solid grey;
+    min-height: 7in;
+
+}
+
+.maindiv{
+    border: 1px solid grey;
+    min-height: 7in;
+}
+
+.grt{
+    margin: 10px;
+
+}
+</style>
+{% endblock %} 
+           
+{% block page_content %}
+
+<div>
+    <div class="row grt">
+        <div class="col-md-2 treediv">{{vicky}}</div>
+        <div class="col-md-10 maindiv">b</div>
+    </div>
+</div>
+
+{% endblock %} 
+{% block script %}
+<script>
+{% include "templates/includes/emp_dashboard.js" %}
+</script>
+{% endblock %}

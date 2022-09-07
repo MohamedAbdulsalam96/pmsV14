@@ -1,0 +1,410 @@
+<style type="text/css">
+    #page-employee-dashboard .layout-main-section-wrapper {
+        margin-bottom: 0px;
+    }
+    #page-employee-dashboard .nav-tabs > li > a{
+        margin-right: 0px !important;
+    }
+    #page-employee-dashboard .jo>li{
+        height: auto !important;
+    }
+    #page-employee-dashboard .maini{
+        margin-top: 0px;
+        margin-bottom: 50px !important;
+    }  
+    #page-employee-dashboard .tab-content .inco {
+        min-height: -webkit-fill-available;
+        max-height: -webkit-fill-available;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        
+    }
+    #page-employee-dashboard .tab-content {
+      margin-right: 0px;
+    }
+    #page-employee-dashboard .bugmain {        
+    max-height: -webkit-fill-available;
+    overflow-y: auto;
+    padding-left: 25px;
+    margin-left: -15px;
+    }  
+    #page-employee-dashboard .taskside{      
+    border-right: 1px solid #dedede;    
+    min-height: -webkit-fill-available;    
+    max-height: 500px;
+    overflow-y: auto;
+    width: 33%;
+    }
+    #page-employee-dashboard .bugside{      
+    border-right: 1px solid #dedede;    
+    min-height: -webkit-fill-available;    
+    max-height: -webkit-fill-available;
+    overflow-y: auto;
+    width: 33%;
+    }
+    #page-employee-dashboard .taskmain{      
+    max-height: -webkit-fill-available;;
+    overflow-y: auto;
+    padding-left: 30px;
+    margin-left: -15px;
+    }
+    #page-employee-dashboard .pri{
+        /*border: 1px solid #d2d8de;*/
+        padding: 4px;
+    }  
+    #page-employee-dashboard .title-text {
+        font-size: 12px;
+    }
+    #page-employee-dashboard .page-head
+    {
+        top: 30px !important;
+        height: 50px !important;
+    }        
+    #page-employee-dashboard .page-content
+    {
+        margin-top: 80px;
+    }
+    #page-employee-dashboard .nav-tabs>li {
+        padding: 0px;
+    }    
+    #page-employee-dashboard .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+        color: #000;
+        border-radius: 0;
+        background-color: #dedede;
+        margin-right: 0;
+        font-weight: 500;
+    }
+    #page-employee-dashboard .jo>li {
+        height: auto !important;
+        padding: 0;
+        border-bottom: 1px solid #eee;
+    }
+    #page-employee-dashboard .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+        color: #000;
+        border-radius: 0;
+        background-color: #eee;
+        margin-right: 0;
+        font-weight: 500;
+    }
+    #page-employee-dashboard .nav>li>a:hover, .nav>li>a:focus {
+        text-decoration: none;
+        background-color: none;
+        border-radius: 0;
+        margin-right: 0;
+        background: #eee;
+    }    
+    #page-employee-dashboard .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+        border: 1px solid transparent;
+        color: #000;
+        border-radius: 0;
+        background-color: #eee;
+        margin-right: 0;
+        font-weight: normal;
+    }
+</style>
+
+<ul class="nav nav-tabs row">
+    <li class="{% if(ops == "Tasks" || opslen == 0 ) { %} active {% } %} 
+        col-md-4" 
+        style="width: 33%;"><a data-toggle="tab" href="#tasks">
+        <i class="fa fa-tasks fa-lg mg" aria-hidden="true"></i>
+    Tasks</a></li>
+    <li class="{% if(ops == "Bugs") { %} active {% } %} 
+        col-md-4" style="width: 33%;"><a data-toggle="tab" href="#bugs">
+        <i class="fa fa-exclamation-triangle fa-lg mg" aria-hidden="true"></i>
+    Bugs</a></li>
+    <li class="{% if(ops == "Info") { %} active {% } %} 
+        col-md-4" style="width: 33%;"><a data-toggle="tab" href="#info">
+        <i class="fa fa-info-circle fa-lg mg" aria-hidden="true"></i>
+    Info</a></li>
+
+</ul>
+
+<div class="tab-content maini">
+    <div id="info" class="tab-pane fade {% if(ops == "Info") { %} in active {% } %} inco">
+        <div class="row">
+            <div class="col-md-3">
+                <h4>
+                    Project
+                </h4>
+                <p>{{content.data.project}}</p>
+            </div>            
+            <div class="col-md-3">
+                <h4>
+                    Module  
+                </h4>
+                <p>{{content.data.module}}</p>
+            </div>
+            <div class="col-md-3">
+                <h4>
+                    Screen Name
+                </h4>
+                <p>{{content.data.screen_name}}</p>
+            </div>
+            <div class="col-md-3">
+                <h4>
+                    Status
+                </h4>
+                <p>{{content.data.status}}</p>
+            </div> 
+            <div class="col-md-12">
+                {% if(content.data.description) { %}
+                    <h4>Description</h4>
+                    <p>{{content.data.description}}</p>
+                {% } %}
+            </div>
+            <div class="col-md-12">
+                <h3>Functionalites</h3>
+                <div style="padding-left: 20px;">
+                    {% if(content.functionality.length > 0) { %}
+                        {% for(var y=0; y< content.functionality.length; y++) { %}
+                            <span style="font-size: 16px;font-weight: 600;margin-top: 10px;float: left;">
+                                {{content.functionality[y].subject}}
+                            </span>
+                            <div class="row">  
+                                <div class="col-md-12">
+                                    <p>{{content.functionality[y].description}}</p>
+                                </div>
+                            </div>
+                        {% } %}
+                    {% } %} 
+                    {% if(content.functionality.length == 0) { %}
+                        <h4>No Functionalities found</h4>
+                    {% } %}
+                </div>          
+            </div>       
+        </div>
+    </div>
+    <div id="tasks" class="tab-pane fade {% if(ops == "Tasks" || opslen == 0 ) { %} in active {% } %}">
+        {% if(content.task_list.length > 0) { %}
+            <div class="row">
+                <div class="col-md-4 taskside">
+                    <div class="page-form flex" style="width: 110%; margin-left: -10px;">
+                        <div class="form-group frappe-control input-max-width col-md-6" data-fieldtype="Select" data-fieldname="priority" title="" data-original-title="Priority">
+                            <select onchange="taskfilterchange(this.value)" type="text" autocomplete="off" class="input-with-feedback form-control hidden-sm hidden-xs input-sm" maxlength="140" data-fieldtype="Select" data-fieldname="priority" placeholder="Priority">
+                            <option selected="selected" hidden disabled>Filter By Status</option>
+                            {% for(var z=0; z< content.options.length; z++) { %}
+                                <option value="{{content.options[z]}}" >{{content.options[z]}}</option>
+                            {% } %}
+                            </select>
+                        </div>
+                        <div class="form-group frappe-control input-max-width col-md-6" data-fieldtype="Select" data-fieldname="priority" title="" data-original-title="Priority">
+                            <select onchange="taskprioritychange(this.value)" type="text" autocomplete="off" class="input-with-feedback form-control hidden-sm hidden-xs input-sm" maxlength="140" data-fieldtype="Select" data-fieldname="priority" placeholder="Priority">
+                            <option selected="selected" hidden disabled>Filter By Priority</option>
+                            {% for(var z=0; z< content.taskpriority.length; z++) { %}
+                                <option value="{{content.taskpriority[z]}}" >{{content.taskpriority[z]}}</option>
+                            {% } %}
+                            </select>
+                        </div>                        
+                    </div>  
+                    <ul class="nav nav-tabs row jo">
+                        {% for(var y=0; y < content.task_list.length; y++) { %}
+                            <li class="col-md-12 {% if(y == 0) { %} active {% } %} sidetab"
+                                data-status="{{content.task_list[y].status}}" 
+                                data-priority="{{content.task_list[y].priority}}">
+                                <a data-toggle="tab" href="#{{content.task_list[y].name}}">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span style="float: left;">
+                                                {{content.task_list[y].subject}}
+                                                </span>
+                                                <span class="
+                                                {% if(content.task_list[y].status == "Open") { %}
+                                                btn-xs btn-danger
+                                                {% } %}
+                                                {% if(content.task_list[y].status == "Closed") { %}
+                                                btn-xs btn-success
+                                                {% } %}
+                                                {% if(content.task_list[y].status == "Working") { %}
+                                                btn-xs btn-warning
+                                                {% } %}" 
+                                                style="float: right;">
+                                                    {{content.task_list[y].status}}
+                                                </span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span style="float: left; margin-top: 15px;">
+                                                {{content.task_list[y].created_date}}
+                                                </span>
+                                                <span style="float: right; margin-top: 15px;">
+                                                    {{content.task_list[y].priority}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% } %}    
+                    </ul>
+                </div>
+                <div class="col-md-8 taskmain">
+                    <div class="tab-content">
+                        {% for(var y=0; y < content.task_list.length; y++) { %}
+                            <div class="tab-pane {% if(y == 0) { %} active {% } %}" 
+                            id="{{content.task_list[y].name}}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>{{content.task_list[y].subject}}</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Status</h5>
+                                        <select data-task="{{content.task_list[y].name}}" onchange="taskchange(this)" type="text" autocomplete="off" class="input-with-feedback form-control" maxlength="140" data-fieldtype="Select" data-fieldname="status" placeholder="" data-doctype="Module">
+                                            {% for(var z=0; z< content.options.length; z++) { %}
+                                                <option value="{{content.options[z]}}" 
+                                                {% if(content.task_list[y].status == content.options[z]) { %}
+                                                selected
+                                                {% } %}>{{content.options[z]}}</option>
+                                            {% } %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Priority</h5>
+                                        <p class="pri">{{content.task_list[y].priority}}</p>
+                                    </div>
+                                    {% if(content.task_list[y].exp_start_date) { %}
+                                    <div class="col-md-6">
+                                        <h5>Start Date</h5>
+                                        <p class="pri">{{content.task_list[y].exp_start_date}}</p>
+                                    </div>
+                                    {% } %}
+                                    {% if(content.task_list[y].exp_end_date) { %}
+                                    <div class="col-md-6">
+                                        <h5>End Date</h5>
+                                        <p class="pri">{{content.task_list[y].exp_end_date}}</p>
+                                    </div>
+                                    {% } %}
+                                    {% if(content.task_list[y].description) { %}
+                                    <div class="col-md-12">
+                                        <h5>Description</h5>
+                                        <p>{{content.task_list[y].description}}</p>
+                                    </div>
+                                    {% } %}
+                                </div>
+                                
+                            </div>
+                         {% } %}     
+                    </div>
+                </div>
+            </div>
+        {% } %} 
+        {% if(content.task_list.length == 0) { %}
+            <div style="text-align: center;">
+                <h3>No Tasks Found</h3>
+            </div>
+        {% } %}
+    </div> 
+    <div id="bugs" class="tab-pane fade {% if(ops == "Bugs") { %} in active {% } %}">
+        {% if(content.bugs.length > 0) { %}
+            <div class="row">
+                <div class="col-md-4 bugside">
+                    <div class="page-form flex" style="width: 110%; margin-left: -10px;">
+                        <div class="form-group frappe-control input-max-width col-md-6" data-fieldtype="Select" data-fieldname="priority" title="" data-original-title="Priority">
+                            <select onchange="bugfilterchange(this.value)" type="text" autocomplete="off" class="input-with-feedback form-control hidden-sm hidden-xs input-sm" maxlength="140" data-fieldtype="Select" data-fieldname="priority" placeholder="Priority">
+                            <option selected="selected" hidden disabled>Filter By Status</option>
+                            {% for(var z=0; z< content.bug_options.length; z++) { %}
+                                <option value="{{content.bug_options[z]}}" >{{content.bug_options[z]}}</option>
+                            {% } %}
+                            </select>
+                        </div>
+                        <div class="form-group frappe-control input-max-width col-md-6" data-fieldtype="Select" data-fieldname="priority" title="" data-original-title="Priority">
+                            <select onchange="bugprioritychange(this.value)" type="text" autocomplete="off" class="input-with-feedback form-control hidden-sm hidden-xs input-sm" maxlength="140" data-fieldtype="Select" data-fieldname="priority" placeholder="Priority">
+                            <option selected="selected" hidden disabled>Filter By Priority</option>
+                            {% for(var z=0; z< content.bugpriority.length; z++) { %}
+                                <option value="{{content.bugpriority[z]}}" >{{content.bugpriority[z]}}</option>
+                            {% } %}
+                            </select>
+                        </div>                        
+                    </div> 
+                    <ul class="nav nav-tabs row jo">
+                        {% for(var y=0; y < content.bugs.length; y++) { %}
+                            <li class="col-md-12 {% if(y == 0) { %} active {% } %} sidetab"
+                                data-status="{{content.bugs[y].status}}" 
+                                data-priority="{{content.bugs[y].priority}}">
+                                <a data-toggle="tab" href="#{{content.bugs[y].name}}">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span style="float: left;">
+                                                {{content.bugs[y].bug_title}}
+                                                </span>
+                                                <span class="
+                                                {% if(content.bugs[y].status == "Open" || "Re-open") { %}
+                                                btn-xs btn-danger
+                                                {% } %}
+                                                {% if(content.bugs[y].status == "Closed" || "Fixed") { %}
+                                                btn-xs btn-success
+                                                {% } %}
+                                                {% if(content.bugs[y].status == "Working") { %}
+                                                btn-xs btn-warning
+                                                {% } %}"  
+                                                style="float: right;">
+                                                    {{content.bugs[y].status}}
+                                                </span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span style="float: left; margin-top: 15px;">
+                                                {{content.bugs[y].creation}}
+                                                </span>
+                                                <span style="float: right; margin-top: 15px;">
+                                                    {{content.bugs[y].priority}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% } %}    
+                    </ul>
+                </div>
+                <div class="col-md-8 bugmain">
+                    <div class="tab-content">
+                        {% for(var y=0; y < content.bugs.length; y++) { %}
+                            <div class="tab-pane {% if(y == 0) { %} active {% } %}" 
+                            id="{{content.bugs[y].name}}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>{{content.bugs[y].bug_title}}</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Status</h5>
+                                        <select data-bug="{{content.bugs[y].name}}" onchange="bugchange(this)" id="project_task_select" type="text" autocomplete="off" class="input-with-feedback form-control" maxlength="140" data-fieldtype="Select" data-fieldname="status" placeholder="" data-doctype="Module">
+                                            {% for(var z=0; z< content.bug_options.length; z++) { %}
+                                                {% if(content.bugs[y].status == content.bug_options[z]) { %}
+                                                    <option value="{{content.bug_options[z]}}" selected>{{content.bug_options[z]}}</option>
+                                                {% } %} 
+                                                {% if(content.bugs[y].status != content.bug_options[z]) { %}
+                                                    <option value="{{content.bug_options[z]}}">{{content.bug_options[z]}}</option>
+                                                {% } %}    
+                                            {% } %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Priority</h5>
+                                        <p class="pri">{{content.bugs[y].priority}}</p>
+                                    </div>
+                                    {% if(content.bugs[y].bug_description) { %}
+                                    <div class="col-md-12">
+                                        <h5>Description</h5>
+                                        <p>{{content.bugs[y].bug_description}}</p>
+                                    </div>
+                                    {% } %}
+                                </div>
+                            </div>
+                         {% } %}    
+                    </div>
+                </div>
+            </div>
+        {% } %}
+        {% if(content.bugs.length == 0) { %}
+            <div style="text-align: center;">
+                <h3>No Bugs Found</h3>
+            </div>
+        {% } %}
+    </div>
+</div>
+

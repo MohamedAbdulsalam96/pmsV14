@@ -1,0 +1,87 @@
+    <div id="bugs" class="tab-pane fade">
+        {% if(content.bugs.length > 0) { %}
+            <div class="row">
+                <div class="col-md-4 bugside">
+                    <ul class="nav nav-tabs row jo">
+                        {% for(var y=0; y < content.bugs.length; y++) { %}
+                            <li class="col-md-12 {% if(y == 0) { %} active {% } %} sidetab">
+                                <a data-toggle="tab" href="#{{content.bugs[y].name}}">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span style="float: left;">
+                                                {{content.bugs[y].bug_title}}
+                                                </span>
+                                                <span class="
+                                                {% if(content.bugs[y].status == "Open" || "Re-open") { %}
+                                                btn-xs btn-danger
+                                                {% } %}
+                                                {% if(content.bugs[y].status == "Closed" || "Fixed") { %}
+                                                btn-xs btn-success
+                                                {% } %}
+                                                {% if(content.bugs[y].status == "Working") { %}
+                                                btn-xs btn-warning
+                                                {% } %}" 
+                                                style="float: right;">
+                                                    {{content.bugs[y].status}}
+                                                </span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <span style="float: left; margin-top: 15px;">
+                                                {{content.bugs[y].creation}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% } %}    
+                    </ul>
+                </div>
+                <div class="col-md-8 bugmain">
+                    <div class="tab-content">
+                        {% for(var y=0; y < content.bugs.length; y++) { %}
+                            <div class="tab-pane {% if(y == 0) { %} active {% } %}" 
+                            id="{{content.bugs[y].name}}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>{{content.bugs[y].bug_title}}</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Status</h5>
+                                        <select data-bug="{{content.bugs[y].name}}" onchange="bugchange(this)" id="project_task_select" type="text" autocomplete="off" class="input-with-feedback form-control" maxlength="140" data-fieldtype="Select" data-fieldname="status" placeholder="" data-doctype="Module">
+                                            {% for(var z=0; z< content.bug_options.length; z++) { %}
+                                                {% if(content.bugs[y].status == content.bug_options[z]) { %}
+                                                    <option value="{{content.bug_options[z]}}" selected>{{content.bug_options[z]}}</option>
+                                                {% } %} 
+                                                {% if(content.bugs[y].status != content.bug_options[z]) { %}
+                                                    <option value="{{content.bug_options[z]}}">{{content.bug_options[z]}}</option>
+                                                {% } %}    
+                                            {% } %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Priority</h5>
+                                        <p class="pri">{{content.bugs[y].priority}}</p>
+                                    </div>
+                                    {% if(content.bugs[y].bug_description) { %}
+                                    <div class="col-md-12">
+                                        <h5>Description</h5>
+                                        <p>{{content.bugs[y].bug_description}}</p>
+                                    </div>
+                                    {% } %}
+                                </div>
+                            </div>
+                         {% } %}    
+                    </div>
+                </div>
+            </div>
+        {% } %}
+        {% if(content.bugs.length == 0) { %}
+            <div style="text-align: center;">
+                <h5>No Bugs Found</h5>
+            </div>
+        {% } %}
+    </div>   
