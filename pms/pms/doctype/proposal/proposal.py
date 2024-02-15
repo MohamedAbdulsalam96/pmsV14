@@ -48,7 +48,7 @@ def sendaccmail(id, location):
 				Kind regards,<br>\
 				Tridots Tech Pvt Ltd.,"				
 	
-	frappe.sendmail(recipients=["vigneshwaran@valiantsystems.com"],
+	frappe.sendmail(recipients=["anupriya@tridotstech.com"],
 	message= to_admin,
 	subject= "Customer Accepted Proposal")
 
