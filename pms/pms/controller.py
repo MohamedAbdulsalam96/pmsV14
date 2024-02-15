@@ -67,7 +67,7 @@ def senddailytask(allow_guest=True):
 	data = 'Daily Project summary @ '+formatdate(nowdate(), "dd-MM-yyyy")
 
 
-	frappe.sendmail(recipients=['vigneshwaran@valiantsystems.com'],
+	frappe.sendmail(recipients=['anupriya@tridotstech.com'],
 		sender = "Testing Valiant2 <testing.valiant2@gmail.com>",
 		message=table,
 		subject=data)
