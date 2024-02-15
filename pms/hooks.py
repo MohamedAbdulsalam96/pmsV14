@@ -8,7 +8,7 @@ app_publisher = "Valiant Systems "
 app_description = "App for managing projects "
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
-app_email = "vigneshwaran@valiantsystems.com"
+app_email = "info@valiantsystems.com"
 app_license = "MIT"
 
 # Includes in <head>
